@@ -1,7 +1,6 @@
 #ifndef _TOKENIZER_
 #define _TOKENIZER_
 
-
 /* Return true (non-zero) if c is a whitespace characer
    ('\t' or ' ').  
    Zero terminators are not printable (therefore false) */
@@ -23,18 +22,12 @@ char *token_terminator(char *token);
 /* Counts the number of tokens in the string argument. */
 int count_tokens(char *str);
 
-/* Returns a fresly allocated new zero-terminated string 
+/* Returns a freshly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
 char *copy_str(char *inStr, short len);
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
    space-separated tokens from zero-terminated str.
-
-   For example, tokenize("hello world string") would result in:
-     tokens[0] = "hello"
-     tokens[1] = "world"
-     tokens[2] = "string" 
-     tokens[3] = 0
 */
 char **tokenize(char* str);
 
@@ -43,5 +36,14 @@ void print_tokens(char **tokens);
 
 /* Frees all tokens and the vector containing themx. */
 void free_tokens(char **tokens);
+
+/* finalizes input by getting rid of the newline from fgets() for user options */
+void finalized_options(char *str, int length);
+
+int token_length(char *str);
+
+extern List* history;     // pointer to linked list
+extern char **tokens;     // double pointer for all tokens in a string
+extern int globalid;       // keep track of the current history id
 
 #endif

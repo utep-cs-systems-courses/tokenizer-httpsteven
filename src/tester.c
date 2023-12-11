@@ -1,3 +1,4 @@
+//tester.c
 #include <string.h>
 #include <stdio.h>
 #include "tokenizer.h"
@@ -13,17 +14,17 @@
 #define TEST_HISTORY 1
 
 /* MinUnit: http://www.jera.com/techinfo/jtns/jtn002.html */
- #define mu_assert(message, test) do { if (!(test)) return message; } while (0)
- #define mu_run_test(test) do { char *message = test(); tests_run++; if (message) return message; } while (0)
+#define mu_assert(message, test) do { if (!(test)) return message; } while (0)
+#define mu_run_test(test) do { char *message = test(); tests_run++; if (message) return message; } while (0)
 int tests_run;
 /* end MinUnit */
-
 
 /* Tokenizer test cases */
 static char *test_string_length() {
     mu_assert("string_length('happy') == 5", string_length("happy") == 5);
     return 0;
 }
+
 static char *test_is_valid_character() {
     mu_assert("is_valid_character(' ') == 0", is_valid_character(' ') == 0);
     mu_assert("is_valid_character('h') == 1", is_valid_character('h') == 1);
@@ -37,9 +38,9 @@ static char *test_find_word_start() {
 }
 
 static char *test_find_word_terminator() {
-  char *str = "happy joy", *empty="";
+    char *str = "happy joy", *empty = "";
     mu_assert("find_word_terminator('happy joy') == &str[5]' '", find_word_terminator(str) == &str[5]);
-    mu_assert("find_word_terminator(emptyStr) == empty", find_word_terminator(empty) == empty);
+    mu_assert("find_word_terminator(empty) == empty", find_word_terminator(empty) == empty);
     return 0;
 }
 
@@ -77,7 +78,6 @@ static char *test_get_history() {
     return 0;
 }
 
-
 static char *all_tests() {
     if (TEST_TOKENIZER) {
         mu_run_test(test_string_length);
@@ -96,7 +96,7 @@ static char *all_tests() {
     return 0;
 }
 
- int main(int argc, char **argv) {   
+int main(int argc, char **argv) {   
     char *result = all_tests();
 
     if (result != 0) 
@@ -107,4 +107,4 @@ static char *all_tests() {
     printf("Tests run: %d\n", tests_run);
 
     return result != 0;
- }
+}
